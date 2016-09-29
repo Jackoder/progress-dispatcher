@@ -1,14 +1,15 @@
-[![](https://jitpack.io/v/Jackoder/method-bridge.svg)](https://jitpack.io/#Jackoder/method-bridge)
-[![](https://travis-ci.org/Jackoder/method-bridge.svg?branch=master)](https://travis-ci.org/Jackoder/method-bridge.svg?branch=master)
+[![](https://jitpack.io/v/Jackoder/progress-dispatcher.svg)](https://jitpack.io/#Jackoder/progress-dispatcher)
+[![](https://travis-ci.org/Jackoder/progress-dispatcher.svg?branch=master)](https://travis-ci.org/Jackoder/progress-dispatcher.svg?branch=master)
 
-# 组件名称
-简介
+# ProgressDispatcher
+进度分发器
 
 特性
 -------
 
-* 特性一
-* 特性二
+* 监听指定ID任务的进度事件和异常事件
+* 支持Listener与Observable的监听方式
+* 待补充
 
 添加依赖
 -------
@@ -26,7 +27,7 @@ allprojects {
 配置依赖
 ```gradle
 dependencies {
-    compile 'com.github.Jackoder:组件名:版本号'
+    compile 'com.github.Jackoder:progress-dispatcher:1.0'
 }
 ```
 
@@ -34,10 +35,20 @@ dependencies {
 -------
 
 ```proguard
-# 组件名
--keepnames class 包名.* {*;}
--keepclassmembers class * {
-    @包名.* <methods>;
+# RxJava
+-dontwarn sun.misc.**
+
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+   long producerIndex;
+   long consumerIndex;
+}
+
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
 ```
 
