@@ -1,0 +1,36 @@
+apply from: 'config/gradle/dependencies.gradle'
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.3'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+
+    group = 'com.github.Jackoder'
+    version = '1.0'
+
+    ext {
+        androidApplicationId = 'com.jackoder.progdispatcher'
+        androidVersionCode = 1
+        androidVersionName = '1.0'
+        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
+}
