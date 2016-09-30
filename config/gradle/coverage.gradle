@@ -11,5 +11,4 @@ coveralls {
 
 tasks.coveralls {
     dependsOn 'test'
-    onlyIf { System.env.'CI' }
 }
