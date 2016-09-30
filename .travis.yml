@@ -51,10 +51,9 @@ cache:
 script:
   # - android list target
   # - ./gradlew connectedAndroidTest
-  - ./gradlew build jacocoReport coveralls
 
 before_install:
    - chmod +x gradlew
 
-# after_success:
-#  - ./gradlew test coveralls
+after_success:
+  - ./gradlew jacocoReport coveralls
