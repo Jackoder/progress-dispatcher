@@ -13,7 +13,7 @@ task jacocoReport(type: org.gradle.testing.jacoco.tasks.JacocoReport, dependsOn:
 
     sourceDirectories = files([mainSrc])
     classDirectories = files([debugTree])
-    executionData = files(subprojects.jacocoTestReport.executionData)
+    executionData = fileTree(dir: projectDir, includes: ['**/*.exec'])
     reports {
         html.enabled = true
         xml.enabled = true

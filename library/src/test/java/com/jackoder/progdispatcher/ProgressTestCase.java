@@ -55,6 +55,7 @@ public class ProgressTestCase extends BaseTestCase {
         progress5.setContext(false);
 
         Assert.assertFalse(progress1.equals(null));
+        Assert.assertFalse(progress1.equals(false));
         Assert.assertTrue(progress1.equals(progress1));
         Assert.assertTrue(progress1.equals(progress2));
         Assert.assertFalse(progress1.equals(progress3));
