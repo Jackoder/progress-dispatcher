@@ -52,4 +52,4 @@ before_install:
    - chmod +x gradlew
 
 after_success:
-  - ./gradlew clean coveralls:report
+  - ./gradlew jacocoReport coveralls
