@@ -56,4 +56,4 @@ before_install:
    - chmod +x gradlew
 
 after_success:
-  - ./gradlew jacocoReport coveralls
+  - ./gradlew test jacocoReport coveralls
