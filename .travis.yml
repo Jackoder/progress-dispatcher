@@ -53,7 +53,7 @@ script:
   # - ./gradlew connectedAndroidTest
 
 before_install:
-   - chmod +x gradlew
+   - chmod +x ./gradlew
 
 after_success:
-  - ./gradlew jacocoReport coveralls
+  - ./gradlew jacocoTestReport coveralls
