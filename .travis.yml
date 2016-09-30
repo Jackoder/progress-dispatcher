@@ -50,3 +50,6 @@ cache:
 
 before_install:
    - chmod +x gradlew
+
+after_success:
+  - coveralls
