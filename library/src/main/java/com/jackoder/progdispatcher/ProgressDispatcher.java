@@ -12,11 +12,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nullable;
+
 import rx.Observable;
 import rx.Observer;
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.android.schedulers.HandlerScheduler;
+import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.subjects.BehaviorSubject;
 import rx.subjects.PublishSubject;
@@ -41,6 +44,8 @@ public class ProgressDispatcher {
     private final BehaviorSubject<State>                mStateBehaviorSubject = BehaviorSubject.create(State.START);
     private final Scheduler mObserveScheduler;
 
+    private final Observable.Transformer<Progress, Progress> mTransformer = RxLifecycle.bindUntilEvent(mStateBehaviorSubject, State.STOP);
+
     private ProgressDispatcher(Handler listenerHandler) {
         if (listenerHandler == null) {
             mObserveScheduler = AndroidSchedulers.mainThread();
@@ -49,13 +54,13 @@ public class ProgressDispatcher {
         }
     }
 
-    public synchronized static void init(Handler listenerHandler) {
+    public synchronized static void init(@Nullable Handler listenerHandler) {
         if (sInstance == null) {
             sInstance = new ProgressDispatcher(listenerHandler);
-            Log.i(TAG, "create new");
+            Log.i(TAG, "init success");
             return;
         }
-        Log.i(TAG, "already created");
+        Log.i(TAG, "already initialize");
     }
 
     public static ProgressDispatcher getInstance() {
@@ -70,7 +75,7 @@ public class ProgressDispatcher {
         synchronized (mOnProgressListeners) {
             mOnProgressListeners.clear();
         }
-        mPublishSubjectMap.clear();
+//        mPublishSubjectMap.clear();
         sInstance = null;
     }
 
@@ -99,7 +104,7 @@ public class ProgressDispatcher {
 
     public Observable<Progress> getProgressObservable(String id) {
         createSubjectIfNotFound(id);
-        return mPublishSubjectMap.get(id);
+        return mPublishSubjectMap.get(id).compose(mTransformer);
     }
 
     public Observer<Progress> getProgressObserver(String id) {
@@ -115,16 +120,13 @@ public class ProgressDispatcher {
 
     private PublishSubject<Progress> createPublishSubject(final String id) {
         final PublishSubject<Progress> subject = PublishSubject.create();
-        Observable.Transformer<Progress, Progress> transformer = RxLifecycle.bindUntilEvent(mStateBehaviorSubject, State.STOP);
-        subject.compose(transformer).observeOn(mObserveScheduler);
-        //FIXME 没有调到doOnUnsubscribe
-        subject/*.doOnUnsubscribe(new Action0() {
+        subject.compose(mTransformer).observeOn(mObserveScheduler).doOnUnsubscribe(new Action0() {
                     @Override
                     public void call() {
                         mPublishSubjectMap.remove(id);
                         Log.d(TAG, "Subject(" + id + ") unsubscribe.");
                     }
-                })*/.subscribe(new Action1<Progress>() {
+                }).subscribe(new Action1<Progress>() {
                     @Override
                     public void call(Progress progress) {
                         Log.d(TAG, "Subject(" + id + ") progress.");

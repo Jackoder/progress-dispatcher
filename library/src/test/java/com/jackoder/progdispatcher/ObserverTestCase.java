@@ -24,4 +24,5 @@ public class ObserverTestCase extends BasicTestCase {
         ProgressDispatcher.getInstance().release();
         Assert.assertNotEquals(observer, ProgressDispatcher.getInstance().getProgressObserver("Test"));
     }
+
 }

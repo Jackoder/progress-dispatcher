@@ -53,7 +53,6 @@ dependencies {
 
     def libs = parent.ext.appLibs
     compile libs.supportV4
-    compile libs.appcompat
     provided libs.supportAnnotation
 
     compile 'com.jakewharton:butterknife:6.0.0'

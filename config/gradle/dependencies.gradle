@@ -9,11 +9,11 @@ allprojects {
         properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
 
         //Android
-        androidBuildToolsVersion = "23.0.1"
+        androidBuildToolsVersion = "22.0.1"
         androidMinSdkVersion = properties.getProperty("MIN_SDK_VERSION", "9")
         androidTargetSdkVersion = properties.getProperty("TARGET_SDK_VERSION", "22")
-        androidCompileSdkVersion = 23
-        androidSupportVersion = "23.1.1"
+        androidCompileSdkVersion = 22
+        androidSupportVersion = "22.2.1"
 
         //Rx
         rxJavaVersion = '1.0.14'
