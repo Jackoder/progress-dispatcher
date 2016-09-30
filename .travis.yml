@@ -52,4 +52,4 @@ before_install:
    - chmod +x gradlew
 
 after_success:
-  - mvn clean coveralls:report
+  - ./gradlew clean coveralls:report
