@@ -1,9 +1,5 @@
 language: android
 
-env:
-  global:
-    - COVERALLS_REPO_TOKEN=GdVHYArwnOT0Yt2QxWfNZ0tDlhTYUGtXz
-
 jdk:
   - oraclejdk7
 
