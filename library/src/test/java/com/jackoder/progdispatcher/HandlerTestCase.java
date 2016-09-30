@@ -40,7 +40,8 @@ public class HandlerTestCase extends BaseTestCase {
         ProgressDispatcher.getInstance().getProgressObserver(ID).onNext(new Progress(ID));
         try {
             countDownLatch.await();
-            Assert.assertEquals("main", mThreadName);
+//            Assert.assertEquals("main", mThreadName);
+            Assert.assertEquals(Thread.currentThread().getName(), mThreadName);
         } catch (InterruptedException e) {
             e.printStackTrace();
             Assert.fail();
@@ -84,7 +85,7 @@ public class HandlerTestCase extends BaseTestCase {
     }
 
     @Before
-    public void tearDown() throws Exception {
+    public void setup() throws Exception {
         ProgressDispatcher.getInstance().release();
     }
 }

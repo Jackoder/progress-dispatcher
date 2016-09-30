@@ -1,5 +1,6 @@
-[![](https://jitpack.io/v/Jackoder/progress-dispatcher.svg)](https://jitpack.io/#Jackoder/progress-dispatcher)
-[![](https://travis-ci.org/Jackoder/progress-dispatcher.svg?branch=master)](https://travis-ci.org/Jackoder/progress-dispatcher.svg?branch=master)
+[![JitPack](https://jitpack.io/v/Jackoder/progress-dispatcher.svg)](https://jitpack.io/#Jackoder/progress-dispatcher)
+[![Travis CI Status](https://travis-ci.org/Jackoder/progress-dispatcher.svg?branch=master)](https://travis-ci.org/Jackoder/progress-dispatcher.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/Jackoder/progress-dispatcher/badge.svg?branch=master)](https://coveralls.io/github/Jackoder/progress-dispatcher?branch=master)
 
 # ProgressDispatcher
 进度分发器
