@@ -1,12 +1,19 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: "com.github.kt3k.coveralls"
 
 apply from: '../config/gradle/android.gradle'
-apply from: '../config/gradle/jacoco.gradle'
+apply from: '../config/gradle/coverage.gradle'
 
 group = 'com.github.Jackoder'
 version = parent.version
+
+android {
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+    }
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
